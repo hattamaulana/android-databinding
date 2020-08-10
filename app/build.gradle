@@ -49,8 +49,10 @@ dependencies {
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
 
+    // jetpack architecture dependency
     implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
 
+    // android testing dependencies
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.hamcrest:hamcrest-all:$hamcrestVersion"
 

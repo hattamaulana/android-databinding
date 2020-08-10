@@ -23,11 +23,26 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.databinding.BindingAdapter
 import com.example.android.databinding.basicsample.R
 import com.example.android.databinding.basicsample.data.Popularity
+
+@BindingAdapter("android:text")
+fun setText(view: TextView, text: CharSequence) {
+    view.text = text
+}
+
+@BindingAdapter("android:bacground")
+fun setBackground(view: View, drawable: Drawable) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        view.background = drawable
+    } else {
+        view.setBackgroundDrawable(drawable)
+    }
+}
 
 /**
  * A Binding Adapter that is called whenever the value of the attribute `app:popularityIcon`
@@ -65,7 +80,7 @@ fun tintPopularity(view: ProgressBar, popularity: Popularity) {
  */
 @BindingAdapter(value = ["app:progressScaled", "android:max"], requireAll = true)
 fun setProgress(progressBar: ProgressBar, likes: Int, max: Int) {
-    progressBar.progress = (likes * max / 5).coerceAtMost(max)
+    progressBar.progress = (likes * max / 10).coerceAtMost(max)
 }
 
 /**
