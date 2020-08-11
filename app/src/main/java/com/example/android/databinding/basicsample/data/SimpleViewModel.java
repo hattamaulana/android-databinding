@@ -19,24 +19,26 @@ public class SimpleViewModel extends ViewModel {
     public LiveData<String> lastName = mLastName;
     public LiveData<Integer> likes = mLikes;
 
-    public String getPopularity() {
-        String popularity = Transformations.map(mLikes, like -> {
+    public LiveData<String> getPopularity() {
+        return Transformations.map(mLikes, like -> {
             Log.i(TAG, "getPopularity: popularity="+ like);
-            if (like > 9) {
+            if (like > 75) {
                 return Popularity.STAR;
-            } else if (like > 4) {
+            } else if (like > 25) {
                 return Popularity.POPULAR;
             } else {
                 return Popularity.NORMAL;
             }
-        }).getValue();
-
-        Log.i(TAG, "getPopularity: popularity="+ popularity);
-        return popularity == null ? "" : popularity;
+        });
     }
 
-    public void onLike() {
+    public void onLike(int max) {
         int value = mLikes.getValue() == null ? 0 : mLikes.getValue();
-        mLikes.setValue(value + 1);
+
+        Log.i(TAG, "onLike: max="+ max);
+
+        if (value < max) {
+            mLikes.setValue(value + 1);
+        }
     }
 }
